@@ -19,6 +19,15 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func compoundinterest(_ sender: Any) {
+        let calculate2 = compoundAmount()
+        result.text=calculate2.compoundcalculate(Loanamount:Double (Loanmount.text!)!,Years:Int (Loanterms.text!)!,Interestrate:Double (rate.text!)!).description
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)  {
+        Loanmount.resignFirstResponder()
+        Loanterms.resignFirstResponder()
+        rate.resignFirstResponder()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,6 +46,14 @@ class simpleAmount  {
         let Rate = Interestrate/100
         let  Interest = Loanamount*Double(Years)*Rate
         return Loanamount + Interest
+        
+    }
+}
+class compoundAmount  {
+    func compoundcalculate(Loanamount:Double,Years:Int,Interestrate:Double) -> Double {
+        let Rate = Interestrate/100
+        let  Interest = pow(1.0+Rate, Double(Years))
+        return Loanamount * Interest
         
     }
 }
